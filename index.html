@@ -5,78 +5,122 @@
     <title>Title</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Bootstrap 4 css -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Bootstrap 4 -->
+    <!--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+
+    <!--&lt;!&ndash; Latest compiled and minified CSS &ndash;&gt;-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+
+    <!--&lt;!&ndash; Optional theme &ndash;&gt;-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
+
+    <!--&lt;!&ndash; Latest compiled and minified JavaScript &ndash;&gt;-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+
+    <script src="js/game.js"></script>
+
+    <!-- BigInteger import -->
+    <script src="http://peterolson.github.com/BigInteger.js/BigInteger.min.js"></script>
+    <script src="js/BiggerInt.js"></script>
 
     <script>
-        // http://codeincomplete.com/posts/javascript-game-foundations-the-game-loop/
         $(function(){
-            // Start up functions
-            var buttonNames = ['test'];
+            let label = $("#lbl-test");
 
-            var buttons = {};
-            for (var i=0; i<buttonNames.length; i++){
-                buttons[buttonNames[i]] = 0;
-                $("#info-"+buttonNames[i]).text(0);
-            }
+            label.text(0);
 
-            buttons['test'] = 0;
-
-            $(".btn-test").on('click', function(){
-                update($(this).attr("value"), 10);
-//                var value = $(this).attr("value");
-//                buttons[value] += 1;
-//
-//                $("#info-"+value).text(buttons[value]);
-            });
-
-            var date = new Date();
-            var now,
-                dt = 0,
-                last = date.getTime(),
-                step = 1/60;
-
-            function update(name, amount){
-                buttons[name] += amount;
-                $("#info-" + name).text(buttons[name]);
-            }
-
-            setInterval(function(){update("test", 1e60)}, 0.1);
-
-//            function frame(){
-//                now = date.getTime();
-//                dt = dt + Math.min(1, (now-last)/1000);
-//                while (dt > step){
-//                    dt = dt-step;
-//                    update(step);
-//                }
-//                //render function
-//
-//                last = now;
-//                requestAnimationFrame(frame);
-//            }
-//
-//            requestAnimationFrame(frame);
+//            let x = bigInt("123456789e12");
+//            let y = bigInt(x.toString());
+//            $(label).text(fbi(y, "sci"));
         });
     </script>
+
+    <!--<script>-->
+        <!--// http://codeincomplete.com/posts/javascript-game-foundations-the-game-loop/-->
+        <!--$(function(){-->
+            <!--// Start up functions-->
+            <!--var buttonNames = ['test'];-->
+
+            <!--var buttons = {};-->
+            <!--for (var i=0; i<buttonNames.length; i++){-->
+                <!--buttons[buttonNames[i]] = 0;-->
+                <!--$("#info-"+buttonNames[i]).text(buttons[buttonNames[i]]);-->
+            <!--}-->
+
+<!--//            buttons['test'] = 1e70;-->
+
+            <!--$(".btn-test").on('click', function(){-->
+                <!--update($(this).attr("value"), 1);-->
+<!--//                var value = $(this).attr("value");-->
+<!--//                buttons[value] += 1;-->
+<!--//-->
+<!--//                $("#info-"+value).text(buttons[value]);-->
+            <!--});-->
+
+            <!--var date = new Date();-->
+            <!--var now,-->
+                <!--dt = 0,-->
+                <!--last = date.getTime(),-->
+                <!--step = 1/60;-->
+
+            <!--function update(name, amount){-->
+                <!--buttons[name] += amount;-->
+                <!--$("#info-" + name).text(buttons[name]);-->
+            <!--}-->
+
+            <!--setInterval(function(){update("test", 1)}, 1000);-->
+
+<!--//            function frame(){-->
+<!--//                now = date.getTime();-->
+<!--//                dt = dt + Math.min(1, (now-last)/1000);-->
+<!--//                while (dt > step){-->
+<!--//                    dt = dt-step;-->
+<!--//                    update(step);-->
+<!--//                }-->
+<!--//                //render function-->
+<!--//-->
+<!--//                last = now;-->
+<!--//                requestAnimationFrame(frame);-->
+<!--//            }-->
+<!--//-->
+<!--//            requestAnimationFrame(frame);-->
+        <!--});-->
+    <!--</script>-->
 </head>
 <body>
 
 <div class="container">
     <div class="row">
-        <div class="col-xs-6">
+        <div class="col-6">
             <br/>
             <span class="info-test" id="info-test">This is text</span>
         </div>
-        <div class="col-xs-6">
+        <div class="col-6">
             <br/>
-            <button class="btn btn-default btn-test" value="test" id="test-btn">This is button</button>
+            <button class="btn btn-test" value="test" id="test-btn">This is button</button>
+        </div>
+    </div>
+    <div class="row">
+        <span class="info-test" id="lbl-test"></span>
+    </div>
+
+    <div class="row">
+        <div class="card-group" id="resource-group">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <ul id="resource-list">
+
+            </ul>
         </div>
     </div>
 </div>
