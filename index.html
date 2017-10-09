@@ -24,103 +24,24 @@
     <!--&lt;!&ndash; Latest compiled and minified JavaScript &ndash;&gt;-->
     <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
 
-    <script src="js/game.js"></script>
-
+    <script src="js/constants.js"></script>
+    <!-- FontAwesome (instead of glyphicons) -->
+    <script src="https://use.fontawesome.com/f657d5957b.js"></script>
     <!-- BigInteger import -->
     <script src="http://peterolson.github.com/BigInteger.js/BigInteger.min.js"></script>
     <script src="js/BiggerInt.js"></script>
+    <script src="js/resources.js"></script>
+    <script src="js/game.js"></script>
 
-    <script>
-        $(function(){
-            let label = $("#lbl-test");
-
-            label.text(0);
-
-//            let x = bigInt("123456789e12");
-//            let y = bigInt(x.toString());
-//            $(label).text(fbi(y, "sci"));
-        });
-    </script>
-
-    <!--<script>-->
-        <!--// http://codeincomplete.com/posts/javascript-game-foundations-the-game-loop/-->
-        <!--$(function(){-->
-            <!--// Start up functions-->
-            <!--var buttonNames = ['test'];-->
-
-            <!--var buttons = {};-->
-            <!--for (var i=0; i<buttonNames.length; i++){-->
-                <!--buttons[buttonNames[i]] = 0;-->
-                <!--$("#info-"+buttonNames[i]).text(buttons[buttonNames[i]]);-->
-            <!--}-->
-
-<!--//            buttons['test'] = 1e70;-->
-
-            <!--$(".btn-test").on('click', function(){-->
-                <!--update($(this).attr("value"), 1);-->
-<!--//                var value = $(this).attr("value");-->
-<!--//                buttons[value] += 1;-->
-<!--//-->
-<!--//                $("#info-"+value).text(buttons[value]);-->
-            <!--});-->
-
-            <!--var date = new Date();-->
-            <!--var now,-->
-                <!--dt = 0,-->
-                <!--last = date.getTime(),-->
-                <!--step = 1/60;-->
-
-            <!--function update(name, amount){-->
-                <!--buttons[name] += amount;-->
-                <!--$("#info-" + name).text(buttons[name]);-->
-            <!--}-->
-
-            <!--setInterval(function(){update("test", 1)}, 1000);-->
-
-<!--//            function frame(){-->
-<!--//                now = date.getTime();-->
-<!--//                dt = dt + Math.min(1, (now-last)/1000);-->
-<!--//                while (dt > step){-->
-<!--//                    dt = dt-step;-->
-<!--//                    update(step);-->
-<!--//                }-->
-<!--//                //render function-->
-<!--//-->
-<!--//                last = now;-->
-<!--//                requestAnimationFrame(frame);-->
-<!--//            }-->
-<!--//-->
-<!--//            requestAnimationFrame(frame);-->
-        <!--});-->
-    <!--</script>-->
 </head>
 <body>
 
 <div class="container">
     <div class="row">
-        <div class="col-6">
-            <br/>
-            <span class="info-test" id="info-test">This is text</span>
-        </div>
-        <div class="col-6">
-            <br/>
-            <button class="btn btn-test" value="test" id="test-btn">This is button</button>
-        </div>
-    </div>
-    <div class="row">
-        <span class="info-test" id="lbl-test"></span>
-    </div>
+        <div class="col-8" id="shown-resources">
+            <div class="card-group" id="resource-group">
 
-    <div class="row">
-        <div class="card-group" id="resource-group">
-
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
-            <ul id="resource-list">
-
-            </ul>
+            </div>
         </div>
     </div>
 </div>
