@@ -1,7 +1,7 @@
 
 
 class Resource{
-    constructor(displayName, canHarvest){
+    constructor(displayName, canHarvest, isVisible){
         this.displayName = displayName;
         this.name = displayName.toLowerCase().replace(/\s/, '_').replace(/[^\w]/, '');
         // this.name = name;
@@ -9,43 +9,68 @@ class Resource{
         this.amount = bigInt(0);
         this.manualBaseChange = bigInt(1);
         this.autoBaseChange = bigInt(1);
-        this.isAuto = false;
+        this.isAuto = !canHarvest;
         this.manualModifier = 1.0;
         this.autoModifier = 1.0;
         this.labelId = "lbl-"+this.name;
         this.lastCapacity = bigInt(-1);
         this.capacity = bigInt(1000);
         this.canHarvest = canHarvest;
-        this.isVisible = true;
+        this.isVisible = isVisible;
     }
 
     createCard(parentQuery){
-        let toAppend = "<div class='card' style='width: "+CARD_WIDTH+"'>" +
-            "<div class='card-block'>" +
-            "<div class='card-body row'>"+
-            "<h4 class='card-title col-8'>" + this.displayName + "</h4>";
+        // Display the name/set initial visibility
+        let toAppend = "<div class=\'list-group-item "+(this.isVisible?"":"hidden-xs-up")+"\'><h4 class=\'col-sm-8\'>"+this.displayName+"</h4>";
 
+        // If we can manually harvest, display the button
         if (this.canHarvest){
-            toAppend += "<div class='col-4'><button class='btn btn-success btn-sm "+MANUAL_HARVEST+" float-right' id='"+this.labelId+"-harvest-button' value='"+this.name+"'><span class='fa fa-plus'></span></button></div>";
+            toAppend += "<div class=\'col-sm-4\'><button class='float-right btn btn-sm btn-outline-success btn-harvest' value='"+this.name+"'><span class='fa fa-plus'></span></button></div>"
+        } else {
+            toAppend += "<div class='col-sm-4'></div>";
         }
-        toAppend += "</div>" +
-            "<div class='card-body'> " +
-            "Stored Amount: <span id='"+this.labelId+"'></span><br/>" +
-            "Capacity: <span id='"+this.labelId+"-capacity'></span><br/>" +
-            "<div class='progress' style='width: "+CARD_PROGRESS_WIDTH+"'>" +
-            "<div class='progress-bar' id='"+this.labelId+"-progressbar' role='progressbar' style='width: 0; height: 5px;'></div>" +
-            "</div>" +
-            "</div>" +
-            "</div>" +
-            "</div>";
+
+        // Display quantity info
+        toAppend += "<div class='col-9 col-sm-5'><div class='progress'><div class='progress-bar' id='"+this.labelId+"-progressbar' role='progressbar' style='width:0; height:5px;'></div></div></div>";
+        toAppend += "<div class='col-sm-9'><span class='float-sm-right'><b>Stored Amount</b></span></div>";
+        toAppend += "<div class='col-9 col-sm-3'><span id='"+this.labelId+"-quantity' class='float-right float-sm-left'></span></div>";
+        toAppend += "<div class='col-sm-9'><span class='float-sm-right'><b>Capacity</b></span></div>";
+        toAppend += "<div class='col-9 col-sm-3'><span id='"+this.labelId+"-capacity' class='float-right float-sm-left'></span></div>";
+
 
         $(parentQuery).append(toAppend);
     }
 
+    // createCard(parentQuery){
+    //     let toAppend = "<div class='list-group-item'>" +
+    //         "<div class='row'>"+
+    //         "<h4 class='col-8'>" + this.displayName + "</h4>";
+    //
+    //     if (this.canHarvest){
+    //         toAppend += "<div class='col-4'><button class='btn btn-success btn-sm "+MANUAL_HARVEST+" float-right' id='"+this.labelId+"-harvest-button' value='"+this.name+"'><span class='fa fa-plus'></span></button></div>";
+    //     } else {
+    //         toAppend += "<div class='col-4'></div>";
+    //     }
+    //     toAppend += "</div>" +
+    //         "<div class='row list-group'>" +
+    //         "<div class='list-group-item'>" +
+    //         "Stored Amount: <span id='"+this.labelId+"'></span>" +
+    //         "</div>" +
+    //         "Capacity: <span id='"+this.labelId+"-capacity'></span><br/>" +
+    //         "<div class='progress'>" +
+    //         "<div class='progress-bar' id='"+this.labelId+"-progressbar' role='progressbar' style='width: 0; height: 5px;'></div>" +
+    //         "</div>" +
+    //         "</div>" +
+    //         "</div>";
+    //
+    //     $(parentQuery).append(toAppend);
+    // }
+
     static getFromObject(resourceObject){
         return new Resource(
             resourceObject.displayName,
-            resourceObject.canHarvest
+            resourceObject.canHarvest,
+            resourceObject.isVisible
         )
     }
 
@@ -69,7 +94,7 @@ class Resource{
     updateShownAmount(){
         if (this.amount.notEquals(this.lastAmount)){
             this.lastAmount = this.amount;
-            $("#"+this.labelId).text(fbi(this.amount));
+            $("#"+this.labelId+"-quantity").text(fbi(this.amount));
             this.updateProgressBar();
             // $("#"+this.labelId+"-progressbar").width(percentage(this.amount, this.capacity)+"%");
         }
@@ -169,12 +194,19 @@ class Game{
 
 
 $(function(){
+    $(window).keydown(function(event){
+        if (event.keyCode === 13){
+            event.preventDefault();
+            return false;
+        }
+    });
+
     // setup the game
     let game = new Game();
 
     // setup interactions
     // When we click one of the manual harvest buttons
-    $("."+MANUAL_HARVEST).on('click', function(){
+    $(".btn-harvest").on('click', function(){
         game.manualClick($(this).attr("value"));
     });
 

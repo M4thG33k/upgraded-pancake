@@ -1,11 +1,13 @@
 RESOURCES = [];
 
-function initResource(displayName, canHarvest){
+function initResource(displayName, canHarvest, isVisible){
     RESOURCES.push({
         displayName: displayName,
-        canHarvest: canHarvest
+        canHarvest: canHarvest,
+        isVisible: isVisible
     })
 }
 
-initResource("First", true);
-initResource("Second", false);
+initResource("First", true, true);
+initResource("Second", false, true);
+initResource("Longer Resource Name", true, true);

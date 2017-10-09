@@ -1,3 +1,0 @@
-CARD_WIDTH = "250px";
-CARD_PROGRESS_WIDTH = "200px";
-MANUAL_HARVEST = "btn-harvest";

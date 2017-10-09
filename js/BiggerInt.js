@@ -20,7 +20,7 @@ function fbi(bigint){
                     extra = 3;
                     numGroups -= 1;
                 }
-                out = out.substr(0, extra) + "." + out.substr(extra, 3) + "e" + (numGroups*3);
+                out = out.substr(0, extra) + "." + out.substr(extra, 3) + "E" + (numGroups*3);
             }
             return out;
         default:
