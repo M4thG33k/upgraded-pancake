@@ -9,5 +9,5 @@ function initResource(displayName, canHarvest, isVisible){
 }
 
 initResource("First", true, true);
-initResource("Second", false, true);
+initResource("Second", true, true);
 initResource("Longer Resource Name", true, true);
