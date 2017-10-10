@@ -112,25 +112,6 @@ class Resource {
         // this.updateResourcesPerSecond(tps, created);
     }
 
-    // updateResourcesPerSecond(tps, delta) {
-    //     let netGain = delta.greaterOrEquals(bigInt.zero);
-    //     delta = delta.abs();
-    //     let html = "<span class=\'text-";
-    //     if (netGain) {
-    //         if (delta.equals(bigInt.zero)) {
-    //             html += "warning";
-    //         } else {
-    //             html += "success";
-    //         }
-    //     } else {
-    //         html += "danger";
-    //     }
-    //
-    //     html += "\'>" + fbi(delta.multiply(tps)) + "</span>/" + fbi(this.excess.multiply(tps));
-    //
-    //     $("#" + this.labelId + "-delta").html(html);
-    // }
-
     updateDisplayedRPS(tps){
         let delta = this.delta;
         let netGain = delta.greaterOrEquals(bigInt.zero);
@@ -146,7 +127,9 @@ class Resource {
             html += "danger";
         }
 
-        html += "\'>" + fbi(delta.multiply(tps)) + "</span>/" + fbi(this.excess.multiply(tps));
+        let deltaView = multFloat(delta, tps);
+        deltaView = (deltaView.equals(bigInt.zero) ? (delta.equals(bigInt.zero) ? "0" : "<1") : fbi(deltaView));
+        html += "\'>" + deltaView + "</span>/" + fbi(multFloat(this.excess, tps));
 
         $("#" + this.labelId + "-delta").html(html);
     }

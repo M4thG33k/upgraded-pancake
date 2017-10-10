@@ -33,10 +33,25 @@
     <script src="js/resources.js"></script>
     <script src="js/game.js"></script>
 
+    <script>
+        $(function () {
+            // Set the spacer div to the same height as the fixed top div (so overlapping doesn't occur when we haven't scrolled at all)
+            $("#spacer-div").height($("#fixed-top-div").height());
+        });
+    </script>
+
 </head>
 <body>
 
 <div class="container" style="min-width: 300px; overflow-x: auto">
+    <div class="row fixed-top" id="fixed-top-div">
+        <div class="col-12" style="background-color: black; color:white;" align="center">
+            <h2>Title bar goes here</h2>
+        </div>
+    </div>
+    <div class="row" id="spacer-div">
+
+    </div>
     <div class="row">
         <div class="col-12 col-sm-11 col-md-10 col-lg-6" id="shown-resources">
             <div class="list-group" id="resource-group">

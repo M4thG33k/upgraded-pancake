@@ -31,3 +31,14 @@ function fbi(bigint){
 function percentage(part, whole){
     return Math.round(part.multiply(10000).divide(whole).toJSNumber()/100);
 }
+
+
+// Use this to multiply a bigInt by a float (only uses 6 digits of accuracy after the decimal
+function multFloat(big, flt){
+    let mod = flt%1;
+    let value = big.multiply(Math.floor(flt));
+    if (mod>0){
+        value = value.add(big.multiply(Math.floor(mod*1000000)).divide(1000000));
+    }
+    return value;
+}
