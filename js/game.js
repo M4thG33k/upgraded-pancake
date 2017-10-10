@@ -59,13 +59,18 @@ class Resource {
     switchCardVersion() {
         this.version = (this.version + 1) % 2;
 
+        let label = "#"+this.labelId+"-card";
+
         let html = "";
         if (this.version === 0) {
             html = this.getFullCard();
+            $(label).removeClass("p-0");
+
         } else if (this.version === 1) {
             html = this.getSmallCard();
+            $(label).addClass("p-0");
         }
-        $("#" + this.labelId + "-card").html(html);
+        $(label).html(html);
 
         this.updateShownAmount();
         this.updateCapacity();
@@ -73,8 +78,9 @@ class Resource {
     }
 
     createCard(parentQuery) {
+        let pad = this.version === 0 ? "" : "p-0";
         // Display the name/set initial visibility
-        let toAppend = "<div class=\'list-group-item " + (this.isVisible ? "" : "hidden-xs-up") + "\' id='" + this.labelId + "-card'>";
+        let toAppend = "<div class=\'"+pad+" list-group-item " + (this.isVisible ? "" : "hidden-xs-up") + "\' id='" + this.labelId + "-card'>";
 
         if (this.version === 0) {
             toAppend += this.getFullCard();
